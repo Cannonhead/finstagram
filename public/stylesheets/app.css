@@ -6,6 +6,7 @@ header {
 body{
     background-color: whitesmoke;
     padding: 16px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -23,4 +24,12 @@ main {
 
 .finstagram-post .user-info img {
     border-radius: 50%;
+  }
+
+  a.photo{
+    transition: padding 0.8s;
+  }
+  
+  a.photo:hover{
+    padding: 10px;
   }
