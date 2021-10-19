@@ -28,7 +28,7 @@ post "/signup" do
     
   # checks if user credentials present and saved
   if @user.save
-    "User #{username} saved!"
+    redirect to('/login')
   else
     erb(:signup) 
   end
@@ -46,7 +46,7 @@ post '/login' do  # when we submit a form with an action of /login
 
     if @user && @user.password == password 
       session[:user_id] = @user.id   
-      "Success! User #{session[:user_id]} logged in."
+      redirect to('/')
     else
       @error_message = "Login failed."
       erb(:login)
@@ -55,7 +55,7 @@ end
 
     get '/logout' do
       session[:user_id] = nil
-      "Logout successful!"
+      redirect to('/')
     end      
 
     get '/' do
