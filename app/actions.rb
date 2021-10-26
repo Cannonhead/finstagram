@@ -23,9 +23,9 @@ post "/signup" do
   username = params[:username]
   password = params[:password]
 
-    # instantiate and save user information
-    @user = User.new({ email: email, avatar_url: avatar_url, username: username, password: password})
-    
+  # instantiate and save user information
+  @user = User.new({ email: email, avatar_url: avatar_url, username: username, password: password})
+  
   # checks if user credentials present and saved
   if @user.save
     redirect to('/login')
@@ -53,13 +53,35 @@ post '/login' do  # when we submit a form with an action of /login
     end
 end
 
-    get '/logout' do
-      session[:user_id] = nil
-      redirect to('/')
-    end      
+get '/logout' do
+  session[:user_id] = nil
+  redirect to('/')
+end      
 
-    get '/' do
-      @finstagram_posts = FInstagrampost.order(created_at: :desc)
-      @current_user = User.find.by(id: session[:user_id])
-      erb(:index)
+
+get '/finstagram_posts/new' do
+  @finstagram_post = FinstagramPost.new
+  erb(:"finstagram_posts/new")
+end  
+
+post '/finstagram_posts' do 
+    photo_url = params[:photo_url] 
+
+    # instantiate new FinstagramPost
+    @finstagram_post = FinstagramPost.new({ photo_url: photo_url, user_id: current_user.id })
+
+    # if @post validates, save
+    if @finstagram_post.save
+      redirect(to('/')) 
+    else
+      
+      # if it doesn't validate, print error messages
+      erb(:"finstagram_posts/new")
     end  
+
+end  
+
+ get '/finstagram_posts/:id' do
+  @finstagram_post = FinstagramPost.find(params[:id])  
+  erb(:"finstagram_posts/show")                         # render app/views/finstagram_posts/show.erb
+ end  
