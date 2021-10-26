@@ -7,7 +7,7 @@
     </div>
     
     <a class="photo" href="/finstagram_posts/<%= finstagram_post.id %>">
-        <img src="<%= finstagram_post.photo_url %>" alt="finstagram post from <%= finstagram_post.user.username %>"
+        <img src="<%= finstagram_post.photo_url %>" alt="finstagram post from <%= finstagram_post.user.username %>"/>
     </a>
 
     <div class="actions">
@@ -15,6 +15,8 @@
         <span class="comment-count"><%= finstagram_post.comment_count %> comments </span>
     </div>
     
+<%= erb(:"shared/new_comment", { locals: { finstagram_post: finstagram_post}}) %>
+
     <ul class="comments">
         <% finstagram_post.comments.each do |comment| %>
             <li>

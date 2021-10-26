@@ -81,7 +81,11 @@ post '/finstagram_posts' do
 
 end  
 
- get '/finstagram_posts/:id' do
-  @finstagram_post = FinstagramPost.find(params[:id])  
-  erb(:"finstagram_posts/show")                         # render app/views/finstagram_posts/show.erb
- end  
+get '/finstagram_posts/:id' do
+ @finstagram_post = FinstagramPost.find(params[:id])  
+ erb(:"finstagram_posts/show")                         # render app/views/finstagram_posts/show.erb
+end  
+
+post '/comments' do
+  params.to_s
+end  
